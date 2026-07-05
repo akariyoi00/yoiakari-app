@@ -51,12 +51,21 @@
     background:rgba(24,18,51,.5);
   }
 
-  /* ===== scene(silhouette/candles/table) ===== */
-  .scene{position:relative;height:190px;margin-top:4px;pointer-events:none}
-  .scene svg{position:absolute;left:50%;transform:translateX(-50%);bottom:0;width:min(100%,440px)}
-  .flame{animation:fl 1.6s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:center bottom}
-  .flame.f2{animation-duration:1.3s;animation-delay:.4s}
-  @keyframes fl{0%{transform:scaleY(1) scaleX(1)}45%{transform:scaleY(1.18) scaleX(.92)}100%{transform:scaleY(.94) scaleX(1.06)}}
+  /* ===== hero ===== */
+  .hero{position:relative;margin:6px -10px 0;pointer-events:none}
+  .hero img{
+    width:100%;display:block;
+    -webkit-mask-image:radial-gradient(78% 82% at 50% 44%,#000 52%,transparent 90%);
+    mask-image:radial-gradient(78% 82% at 50% 44%,#000 52%,transparent 90%);
+  }
+  .hero .glow{
+    position:absolute;width:34px;height:50px;border-radius:50%;
+    background:radial-gradient(circle at 50% 62%,rgba(255,216,150,.5),rgba(255,170,80,.16) 55%,transparent 78%);
+    filter:blur(5px);transform-origin:center bottom;
+    animation:fl 1.6s ease-in-out infinite alternate;
+  }
+  .hero .glow.g2{animation-duration:1.3s;animation-delay:.4s}
+  @keyframes fl{0%{transform:scaleY(1) scaleX(1);opacity:.85}45%{transform:scaleY(1.15) scaleX(.94);opacity:1}100%{transform:scaleY(.95) scaleX(1.05);opacity:.8}}
 
   /* ===== question select ===== */
   .q-lead{text-align:center;font-size:15.5px;line-height:2;margin-top:14px;color:var(--cream)}
@@ -72,7 +81,7 @@
   .qbtn:active{background:rgba(60,48,110,.9)}
 
   /* ===== fan ===== */
-  #fan{position:relative;height:208px;margin-top:6px}
+  #fan{position:relative;height:208px;margin-top:-118px;z-index:2}
   .fcard{
     position:absolute;left:50%;top:72px;width:62px;height:96px;margin-left:-31px;
     cursor:pointer;transition:transform .25s ease, filter .25s ease;
@@ -234,31 +243,10 @@
 
   <!-- ======== STEP1: 選ぶ ======== -->
   <section id="scr-pick">
-    <div class="scene">
-      <svg viewBox="0 0 440 190">
-        <!-- フードの人影 -->
-        <path d="M220,28 C196,28 184,50 182,74 C168,80 150,92 146,116 L294,116 C290,92 272,80 258,74 C256,50 244,28 220,28 Z" fill="#0e0b20"/>
-        <path d="M220,40 C206,40 199,54 199,68 C199,80 208,90 220,90 C232,90 241,80 241,68 C241,54 234,40 220,40 Z" fill="#080614"/>
-        <circle cx="220" cy="104" r="7" fill="none" stroke="#c9a35c" stroke-width="1" opacity=".8"/>
-        <path d="M220,97 V88" stroke="#c9a35c" stroke-width="1" opacity=".8"/>
-        <!-- テーブル -->
-        <ellipse cx="220" cy="152" rx="212" ry="40" fill="#171232"/>
-        <ellipse cx="220" cy="150" rx="212" ry="40" fill="none" stroke="#c9a35c" stroke-width="2.4" opacity=".8"/>
-        <ellipse cx="220" cy="152" rx="188" ry="33" fill="#120e28"/>
-        <!-- 蝋燭 左右 -->
-        <g transform="translate(38,96)">
-          <rect x="-4" y="18" width="8" height="30" rx="2" fill="#d8cfc0"/>
-          <path d="M-10,48 h20 l3,7 h-26 Z" fill="#8a7648"/>
-          <ellipse class="flame" cx="0" cy="8" rx="5" ry="11" fill="#f5c96a"/>
-          <ellipse class="flame" cx="0" cy="10" rx="2.4" ry="6" fill="#fff3d0"/>
-        </g>
-        <g transform="translate(402,96)">
-          <rect x="-4" y="18" width="8" height="30" rx="2" fill="#d8cfc0"/>
-          <path d="M-10,48 h20 l3,7 h-26 Z" fill="#8a7648"/>
-          <ellipse class="flame f2" cx="0" cy="8" rx="5" ry="11" fill="#f5c96a"/>
-          <ellipse class="flame f2" cx="0" cy="10" rx="2.4" ry="6" fill="#fff3d0"/>
-        </g>
-      </svg>
+    <div class="hero">
+      <img src="img/hero.jpg" alt="宵灯の占い館の占い師・灯">
+      <i class="glow" style="left:calc(20.2% - 17px);top:calc(34% - 25px)"></i>
+      <i class="glow g2" style="left:calc(79.8% - 17px);top:calc(34% - 25px)"></i>
     </div>
 
     <!-- 質問選択 -->
@@ -272,8 +260,8 @@
 
     <!-- カードの扇 -->
     <div id="fanarea" class="hidden">
-      <p class="fan-lead">気になるカードを<b>3枚</b>選んでください<span id="fancnt"></span></p>
       <div id="fan"></div>
+      <p class="fan-lead" style="margin-top:10px">気になるカードを<b>3枚</b>選んでください<span id="fancnt"></span></p>
       <button class="btn-outline hidden" id="openbtn" onclick="goOpen()">カードをひらく</button>
     </div>
 
