@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>宵灯の占い館🌙｜復縁タロット 三枚引き</title>
+<meta name="description" content="気になる問いを心に浮かべて、22枚から3枚を選んでください。過去・現在・未来のカードが、お二人の縁にこたえます。">
+<meta property="og:title" content="宵灯の占い館🌙 復縁タロット">
+<meta property="og:description" content="三枚のカードが、お二人の縁にこたえます。無料・登録不要。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#13102a; --bg2:#1c1638; --panel:#181233;
+    --gold:#d9a94a; --gold-line:#c9a35c; --gold-pale:#e8cf9a; --gold-dim:#8a7648;
+    --cream:#f2e9d5; --lav:#8d7bc0; --lav-deep:#6c5aa8;
+    --pink:#e87ea1;
+    --serif:"Shippori Mincho","Hiragino Mincho ProN","Yu Mincho","YuMincho",serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html{background:var(--bg)}
+  body{
+    font-family:var(--serif);color:var(--cream);min-height:100vh;letter-spacing:.05em;
+    background:radial-gradient(120% 60% at 50% 0%,#241c4a 0%,#1a1438 45%,#120f27 100%);
+    background-attachment:fixed;overflow-x:hidden;
+  }
+  #sky{position:fixed;inset:0;z-index:0;pointer-events:none}
+  #sky .grain{position:absolute;inset:0;opacity:.05;
+    background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2"/></filter><rect width="180" height="180" filter="url(%23n)"/></svg>');}
+  .star{position:absolute;background:#efe2bd;border-radius:50%;animation:tw 4s ease-in-out infinite}
+  @keyframes tw{0%,100%{opacity:.8}50%{opacity:.12}}
+  .wrap{position:relative;z-index:1;max-width:480px;margin:0 auto;padding:18px 18px 46px}
+  .hidden{display:none!important}
+
+  /* ===== header ===== */
+  header{text-align:center;padding:6px 0 2px}
+  header .hm{color:var(--gold);font-size:20px;line-height:1}
+  header h1{
+    font-size:20px;font-weight:700;color:var(--gold-pale);letter-spacing:.34em;text-indent:.34em;
+    margin-top:8px;display:flex;align-items:center;justify-content:center;gap:12px;
+  }
+  header h1::before,header h1::after{content:"⟡—";color:var(--gold-dim);font-size:11px;letter-spacing:0;text-indent:0}
+  header h1::after{content:"—⟡"}
+  header .tag{font-size:11px;color:rgba(242,233,213,.55);margin-top:7px;letter-spacing:.22em}
+
+  /* ===== pill status ===== */
+  .pill{
+    display:table;margin:16px auto 0;font-size:14px;color:var(--cream);
+    border:1px solid rgba(201,163,92,.55);border-radius:99px;padding:10px 26px;letter-spacing:.14em;
+    background:rgba(24,18,51,.5);
+  }
+
+  /* ===== scene(silhouette/candles/table) ===== */
+  .scene{position:relative;height:190px;margin-top:4px;pointer-events:none}
+  .scene svg{position:absolute;left:50%;transform:translateX(-50%);bottom:0;width:min(100%,440px)}
+  .flame{animation:fl 1.6s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:center bottom}
+  .flame.f2{animation-duration:1.3s;animation-delay:.4s}
+  @keyframes fl{0%{transform:scaleY(1) scaleX(1)}45%{transform:scaleY(1.18) scaleX(.92)}100%{transform:scaleY(.94) scaleX(1.06)}}
+
+  /* ===== question select ===== */
+  .q-lead{text-align:center;font-size:15.5px;line-height:2;margin-top:14px;color:var(--cream)}
+  .qbtn{
+    display:block;width:100%;text-align:center;cursor:pointer;font-family:var(--serif);
+    font-size:15.5px;font-weight:600;color:var(--cream);letter-spacing:.08em;
+    background:linear-gradient(180deg,rgba(38,30,74,.85),rgba(26,20,54,.85));
+    border:1px solid rgba(201,163,92,.5);border-radius:14px;
+    padding:17px 12px;margin-top:12px;position:relative;
+  }
+  .qbtn::before,.qbtn::after{content:"✦";position:absolute;top:50%;transform:translateY(-50%);font-size:9px;color:var(--gold-dim)}
+  .qbtn::before{left:14px}.qbtn::after{right:14px}
+  .qbtn:active{background:rgba(60,48,110,.9)}
+
+  /* ===== fan ===== */
+  #fan{position:relative;height:208px;margin-top:6px}
+  .fcard{
+    position:absolute;left:50%;top:72px;width:62px;height:96px;margin-left:-31px;
+    cursor:pointer;transition:transform .25s ease, filter .25s ease;
+  }
+  .fcard svg{width:100%;height:100%;display:block;filter:drop-shadow(0 4px 10px rgba(0,0,0,.55))}
+  .cardimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:7px;pointer-events:none;z-index:2;box-shadow:0 4px 10px rgba(0,0,0,.55)}
+  .face .cardimg{border-radius:8px;box-shadow:none}
+  .fcard.on{filter:drop-shadow(0 0 14px rgba(217,169,74,.95));z-index:30!important}
+  .fan-lead{text-align:center;font-size:15px;letter-spacing:.12em;color:var(--cream);margin-top:2px}
+  .fan-lead b{color:var(--gold-pale)}
+
+  /* ===== buttons ===== */
+  .btn-outline{
+    display:flex;align-items:center;justify-content:center;gap:14px;width:100%;cursor:pointer;
+    font-family:var(--serif);font-size:20px;font-weight:700;letter-spacing:.3em;text-indent:.3em;
+    color:var(--gold-pale);background:radial-gradient(80% 120% at 50% 0%,rgba(217,169,74,.14),rgba(24,18,51,.2));
+    border:1.5px solid rgba(217,169,74,.8);border-radius:999px;padding:19px 10px;margin-top:18px;
+    box-shadow:0 0 24px rgba(217,169,74,.18), inset 0 0 18px rgba(217,169,74,.08);
+  }
+  .btn-outline::before,.btn-outline::after{content:"✦";font-size:12px;letter-spacing:0;text-indent:0;color:var(--gold)}
+  .btn-outline:active{transform:scale(.98)}
+  .btn-line{
+    display:flex;align-items:center;justify-content:center;gap:10px;width:100%;cursor:pointer;border:none;
+    font-family:var(--serif);font-size:19px;font-weight:800;color:#fff;letter-spacing:.06em;
+    background:linear-gradient(180deg,#35c93f,#0daf3c);border-radius:999px;padding:19px 10px;margin-top:16px;
+    box-shadow:0 8px 24px rgba(20,170,60,.4), inset 0 0 0 1px rgba(255,255,255,.3);
+  }
+  .btn-line .lg{background:#fff;color:#0daf3c;font-weight:800;font-size:13px;letter-spacing:.05em;border-radius:8px;padding:4px 8px}
+  .btn-line:active{transform:scale(.98)}
+  .ghostlink{background:none;border:none;color:rgba(242,233,213,.6);font-size:14px;margin:22px auto 0;cursor:pointer;font-family:var(--serif);display:block;letter-spacing:.16em;border-bottom:1px dotted rgba(242,233,213,.4);padding-bottom:3px}
+
+  /* ===== spread(3 cards) ===== */
+  .spread{display:flex;gap:12px;justify-content:center;margin-top:20px}
+  .slot{width:31%;max-width:118px;text-align:center}
+  .slot .pos{font-size:12.5px;color:var(--gold-pale);letter-spacing:.3em;text-indent:.3em;margin-bottom:9px}
+  .flip{perspective:900px;cursor:pointer}
+  .flip .fin{position:relative;width:100%;aspect-ratio:62/100}
+  /* Safari対策: preserve-3dを使わず、表裏を個別に回転させる（overflow:hidden+backface-visibilityの併用バグ回避） */
+  .face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:9px;overflow:hidden;transition:transform .8s cubic-bezier(.3,.7,.3,1)}
+  .face.back{transform:rotateY(0deg)}
+  .flip.open .face.back{transform:rotateY(180deg)}
+  .flip.open .face.front{transform:rotateY(0deg)}
+  .flip.open .face.front.rev{transform:rotateY(0deg) rotate(180deg)}
+  .face.back svg{width:100%;height:100%;display:block}
+  .face.front{transform:rotateY(-180deg);background:linear-gradient(170deg,#241c4c,#171232);
+    border:1.5px solid var(--gold-line);box-shadow:inset 0 0 0 3px #171232, inset 0 0 0 4px rgba(201,163,92,.5), 0 6px 16px rgba(0,0,0,.5);
+    display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:7px 4px}
+  .face.front .nm{font-size:12px;font-weight:700;color:var(--gold-pale);letter-spacing:.18em;text-indent:.18em;border-bottom:1px solid rgba(201,163,92,.5);padding:0 6px 3px;white-space:nowrap}
+  .face.front .emblem{flex:1;display:flex;align-items:center;justify-content:center;width:100%}
+  .face.front .emblem svg{width:62%;max-height:74px}
+  .face.front .num{font-size:10.5px;color:var(--gold);border:1px solid rgba(201,163,92,.7);border-radius:99px;padding:1px 9px;letter-spacing:.1em}
+  .face.front.rev{transform:rotateY(-180deg) rotate(180deg)}
+  .slot .rd{font-size:11.5px;color:rgba(242,233,213,.85);margin-top:9px;line-height:1.6;min-height:2.8em}
+  .slot .rd b{color:var(--pink);font-weight:600}
+  .flip.open{cursor:default}
+  .flip:not(.open) .fin{animation:pulse 2.2s ease-in-out infinite}
+  @keyframes pulse{0%,100%{filter:drop-shadow(0 0 2px rgba(217,169,74,.15))}50%{filter:drop-shadow(0 0 12px rgba(217,169,74,.5))}}
+
+  /* ===== ornate panel ===== */
+  .panel{
+    position:relative;margin-top:22px;padding:26px 20px;border:1px solid rgba(201,163,92,.55);border-radius:6px;
+    background:linear-gradient(170deg,rgba(30,23,60,.75),rgba(20,15,43,.75));
+  }
+  .panel::before{content:"";position:absolute;inset:5px;border:1px solid rgba(201,163,92,.3);border-radius:3px;pointer-events:none}
+  .panel .cor{position:absolute;color:var(--gold-line);font-size:13px;line-height:1}
+  .panel .cor.a{top:-8px;left:-4px}.panel .cor.b{top:-8px;right:-4px}
+  .panel .cor.c{bottom:-8px;left:-4px}.panel .cor.d{bottom:-8px;right:-4px}
+  .panel h4{text-align:center;font-size:16px;color:var(--gold-pale);letter-spacing:.22em;text-indent:.22em;margin-bottom:16px}
+  .panel h4 .s{color:var(--gold);font-size:12px}
+  .panel p{font-size:15px;line-height:2.3;color:var(--cream)}
+  .panel .divider{height:1px;background:linear-gradient(90deg,transparent,rgba(232,126,161,.6),transparent);margin:18px 0 14px}
+  .verdict{display:flex;align-items:center;gap:10px;justify-content:center;font-size:18.5px;font-weight:800;color:var(--pink);letter-spacing:.1em;line-height:1.8;text-align:center}
+  .verdict .ic{color:var(--gold);font-size:16px}
+
+  /* ===== CTA section ===== */
+  .cta-head{text-align:center;font-size:27px;font-weight:800;color:var(--cream);line-height:1.8;letter-spacing:.1em;margin-top:34px;text-shadow:0 0 26px rgba(217,169,74,.3)}
+  .cta-sub{text-align:center;font-size:14px;line-height:2.2;color:rgba(242,233,213,.85);margin-top:14px}
+  .benefit{
+    display:flex;align-items:center;gap:14px;margin-top:12px;padding:15px 16px;
+    border:1px solid rgba(201,163,92,.55);border-radius:12px;position:relative;
+    background:linear-gradient(180deg,rgba(32,25,64,.7),rgba(22,17,46,.7));
+    font-size:16px;font-weight:700;color:var(--cream);letter-spacing:.06em;
+  }
+  .benefit .bi{
+    width:38px;height:38px;flex:0 0 38px;border:1.5px solid var(--gold-line);border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .benefit .bi svg{width:19px;height:19px;fill:var(--gold)}
+  .benefit::after{content:"✦";position:absolute;right:13px;top:50%;transform:translateY(-50%);font-size:9px;color:var(--gold-dim)}
+  .ctabox{position:relative;margin-top:22px;padding:26px 18px 22px;border:1px solid rgba(201,163,92,.6);border-radius:10px;background:rgba(20,15,43,.6);text-align:center}
+  .ctabox::before{content:"";position:absolute;inset:5px;border:1px solid rgba(201,163,92,.3);border-radius:6px;pointer-events:none}
+  .ctabox h3{font-size:20px;font-weight:800;color:var(--cream);letter-spacing:.16em}
+  .ctabox h3 .s{color:var(--gold);font-size:13px}
+  .ctabox .note{font-size:12px;color:rgba(242,233,213,.75);margin-top:12px;letter-spacing:.06em}
+
+  /* ===== step nav ===== */
+  .steps{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:32px;user-select:none}
+  .steps .st{display:flex;flex-direction:column;align-items:center;gap:6px;width:64px;color:rgba(242,233,213,.35);font-size:13px;letter-spacing:.2em;text-indent:.2em}
+  .steps .st .ic{font-size:17px}
+  .steps .st.now{color:var(--gold-pale)}
+  .steps .st.now .ic{color:var(--gold)}
+  .steps .dots-line{flex:1;max-width:86px;border-top:2px dotted rgba(242,233,213,.25);margin-bottom:20px}
+  footer{font-size:10.5px;color:rgba(242,233,213,.45);line-height:2;text-align:center;padding:26px 6px 0;font-weight:500}
+</style>
+</head>
+<body>
+<div id="sky"><div class="grain"></div></div>
+
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <!-- カード裏面 -->
+    <symbol id="cardback" viewBox="0 0 62 100">
+      <rect x="1" y="1" width="60" height="98" rx="7" fill="#1b1440" stroke="#c9a35c" stroke-width="1.6"/>
+      <rect x="5" y="5" width="52" height="90" rx="4.5" fill="none" stroke="#c9a35c" stroke-width=".7" opacity=".75"/>
+      <ellipse cx="31" cy="50" rx="20" ry="27" fill="none" stroke="#c9a35c" stroke-width=".6" stroke-dasharray="1 3" opacity=".8"/>
+      <ellipse cx="31" cy="50" rx="13" ry="18" fill="none" stroke="#c9a35c" stroke-width=".5" stroke-dasharray="1 3" opacity=".6"/>
+      <path d="M38,38 A14,14 0 1,0 38,62 A11.5,11.5 0 1,1 38,38 Z" fill="#d9a94a" opacity=".95"/>
+      <circle cx="14" cy="18" r="1.1" fill="#e8cf9a"/><circle cx="48" cy="14" r=".9" fill="#e8cf9a"/>
+      <circle cx="50" cy="82" r="1.1" fill="#e8cf9a"/><circle cx="12" cy="86" r=".9" fill="#e8cf9a"/>
+      <path d="M31,10 l1.2,3 3,1.2 -3,1.2 -1.2,3 -1.2,-3 -3,-1.2 3,-1.2 Z" fill="#e8cf9a" opacity=".9"/>
+      <path d="M31,81 l1.2,3 3,1.2 -3,1.2 -1.2,3 -1.2,-3 -3,-1.2 3,-1.2 Z" fill="#e8cf9a" opacity=".9"/>
+    </symbol>
+    <!-- 選択中カード（薄紫） -->
+    <symbol id="cardback-lav" viewBox="0 0 62 100">
+      <rect x="1" y="1" width="60" height="98" rx="7" fill="#7e6cb8" stroke="#e8cf9a" stroke-width="1.6"/>
+      <rect x="5" y="5" width="52" height="90" rx="4.5" fill="none" stroke="#f2e9d5" stroke-width=".7" opacity=".8"/>
+      <path d="M38,38 A14,14 0 1,0 38,62 A11.5,11.5 0 1,1 38,38 Z" fill="#f7f1df"/>
+      <path d="M31,12 l1.2,3 3,1.2 -3,1.2 -1.2,3 -1.2,-3 -3,-1.2 3,-1.2 Z" fill="#f2e9d5"/>
+      <path d="M31,79 l1.2,3 3,1.2 -3,1.2 -1.2,3 -1.2,-3 -3,-1.2 3,-1.2 Z" fill="#f2e9d5"/>
+    </symbol>
+    <!-- 絵柄エンブレム -->
+    <symbol id="em-star" viewBox="-32 -32 64 64"><g fill="none" stroke="#d9a94a" stroke-width="1.6"><path d="M0,-26 L5,-5 L26,0 L5,5 L0,26 L-5,5 L-26,0 L-5,-5 Z"/><circle r="30" stroke-dasharray="1 5" stroke-width=".8"/></g></symbol>
+    <symbol id="em-moon" viewBox="-32 -32 64 64"><g fill="none" stroke="#d9a94a" stroke-width="1.6"><path d="M10,-22 A24,24 0 1,0 10,22 A19,19 0 1,1 10,-22 Z"/><circle r="30" stroke-dasharray="1 5" stroke-width=".8"/></g></symbol>
+    <symbol id="em-sun" viewBox="-32 -32 64 64"><g fill="none" stroke="#d9a94a" stroke-width="1.6"><circle r="12"/><g stroke-width="1.2">
+      <path d="M0,-18 V-26"/><path d="M0,18 V26"/><path d="M-18,0 H-26"/><path d="M18,0 H26"/>
+      <path d="M13,-13 L18,-18"/><path d="M-13,13 L-18,18"/><path d="M13,13 L18,18"/><path d="M-13,-13 L-18,-18"/></g></g></symbol>
+    <symbol id="em-heart" viewBox="-32 -32 64 64"><g fill="none" stroke="#d9a94a" stroke-width="1.6"><path d="M0,20 C-22,4 -20,-14 -8,-14 C-2,-14 0,-9 0,-6 C0,-9 2,-14 8,-14 C20,-14 22,4 0,20 Z"/><circle r="30" stroke-dasharray="1 5" stroke-width=".8"/></g></symbol>
+    <symbol id="em-wheel" viewBox="-32 -32 64 64"><g fill="none" stroke="#d9a94a" stroke-width="1.6"><circle r="18"/><circle r="5"/><path d="M0,-18 V18 M-18,0 H18 M-12.7,-12.7 L12.7,12.7 M-12.7,12.7 L12.7,-12.7" stroke-width="1.1"/></g></symbol>
+    <symbol id="em-tower" viewBox="-32 -32 64 64"><g fill="none" stroke="#d9a94a" stroke-width="1.6"><path d="M-9,22 L-9,-10 L9,-10 L9,22"/><path d="M-12,-10 L-12,-16 L12,-16 L12,-10"/><path d="M-2,22 L-2,12 L2,12 L2,22"/><path d="M18,-26 L6,-14 L14,-16 L2,-4" stroke-width="1.2"/></g></symbol>
+    <symbol id="em-scale" viewBox="-32 -32 64 64"><g fill="none" stroke="#d9a94a" stroke-width="1.4"><path d="M0,-18 V14 M-14,20 H14 M-20,-12 H20"/><path d="M-20,-12 L-25,0 A6.5,6.5 0 0,0 -15,0 Z M20,-12 L15,0 A6.5,6.5 0 0,0 25,0 Z"/></g></symbol>
+    <symbol id="em-lantern" viewBox="-32 -32 64 64"><g fill="none" stroke="#d9a94a" stroke-width="1.5"><path d="M-7,-12 H7 L9,10 H-9 Z"/><path d="M0,-12 V-19 M-4,-19 H4"/><path d="M-5,10 L-5,16 M5,10 L5,16 M-8,16 H8"/><circle cy="0" r="3" fill="#d9a94a" stroke="none"/></g></symbol>
+    <symbol id="em-cup" viewBox="-32 -32 64 64"><g fill="none" stroke="#d9a94a" stroke-width="1.5"><path d="M-13,-14 H13 C13,0 6,4 0,4 C-6,4 -13,0 -13,-14 Z"/><path d="M0,4 V14 M-9,18 C-4,14 4,14 9,18"/><path d="M-3,-22 C0,-19 0,-17 -1,-15 M4,-24 C6,-21 6,-19 5,-17" stroke-width="1.1"/></g></symbol>
+    <symbol id="em-inf" viewBox="-32 -32 64 64"><g fill="none" stroke="#d9a94a" stroke-width="1.6"><path d="M-2,0 C-8,-9 -22,-8 -22,0 C-22,8 -8,9 -2,0 C4,-9 18,-8 18,0 C18,8 4,9 -2,0 Z" transform="translate(2,0)"/><circle r="30" stroke-dasharray="1 5" stroke-width=".8"/></g></symbol>
+    <symbol id="em-angel" viewBox="-32 -32 64 64"><g fill="none" stroke="#d9a94a" stroke-width="1.5"><path d="M-6,20 L-3,-6 H3 L6,20"/><circle cy="-13" r="6"/><path d="M-3,-2 C-14,-6 -18,4 -24,4 M3,-2 C14,-6 18,4 24,4" stroke-width="1.2"/></g></symbol>
+    <symbol id="em-world" viewBox="-32 -32 64 64"><g fill="none" stroke="#d9a94a" stroke-width="1.5"><ellipse rx="14" ry="22"/><ellipse rx="22" ry="14"/><circle r="4" fill="#d9a94a" stroke="none"/></g></symbol>
+    <!-- CTAアイコン -->
+    <symbol id="bi-heart" viewBox="0 0 24 24"><path d="M12,21 C3.5,15 4,7.5 8.5,7.5 C10.8,7.5 12,9.5 12,10.5 C12,9.5 13.2,7.5 15.5,7.5 C20,7.5 20.5,15 12,21 Z"/></symbol>
+    <symbol id="bi-clock" viewBox="0 0 24 24"><path d="M12,2 A10,10 0 1,0 12,22 A10,10 0 1,0 12,2 Z M12,4 A8,8 0 1,1 12,20 A8,8 0 1,1 12,4 Z M11,6 H13 V12.4 L17.4,15 L16.4,16.7 L11,13.5 Z"/></symbol>
+    <symbol id="bi-compass" viewBox="0 0 24 24"><path d="M12,1 L14,10 L23,12 L14,14 L12,23 L10,14 L1,12 L10,10 Z"/></symbol>
+  </defs>
+</svg>
+
+<div class="wrap">
+  <header>
+    <div class="hm">☾</div>
+    <h1>宵灯の占い館</h1>
+    <div class="tag">— 復縁タロット・三枚引き —</div>
+  </header>
+
+  <!-- ======== STEP1: 選ぶ ======== -->
+  <section id="scr-pick">
+    <div class="scene">
+      <svg viewBox="0 0 440 190">
+        <!-- フードの人影 -->
+        <path d="M220,28 C196,28 184,50 182,74 C168,80 150,92 146,116 L294,116 C290,92 272,80 258,74 C256,50 244,28 220,28 Z" fill="#0e0b20"/>
+        <path d="M220,40 C206,40 199,54 199,68 C199,80 208,90 220,90 C232,90 241,80 241,68 C241,54 234,40 220,40 Z" fill="#080614"/>
+        <circle cx="220" cy="104" r="7" fill="none" stroke="#c9a35c" stroke-width="1" opacity=".8"/>
+        <path d="M220,97 V88" stroke="#c9a35c" stroke-width="1" opacity=".8"/>
+        <!-- テーブル -->
+        <ellipse cx="220" cy="152" rx="212" ry="40" fill="#171232"/>
+        <ellipse cx="220" cy="150" rx="212" ry="40" fill="none" stroke="#c9a35c" stroke-width="2.4" opacity=".8"/>
+        <ellipse cx="220" cy="152" rx="188" ry="33" fill="#120e28"/>
+        <!-- 蝋燭 左右 -->
+        <g transform="translate(38,96)">
+          <rect x="-4" y="18" width="8" height="30" rx="2" fill="#d8cfc0"/>
+          <path d="M-10,48 h20 l3,7 h-26 Z" fill="#8a7648"/>
+          <ellipse class="flame" cx="0" cy="8" rx="5" ry="11" fill="#f5c96a"/>
+          <ellipse class="flame" cx="0" cy="10" rx="2.4" ry="6" fill="#fff3d0"/>
+        </g>
+        <g transform="translate(402,96)">
+          <rect x="-4" y="18" width="8" height="30" rx="2" fill="#d8cfc0"/>
+          <path d="M-10,48 h20 l3,7 h-26 Z" fill="#8a7648"/>
+          <ellipse class="flame f2" cx="0" cy="8" rx="5" ry="11" fill="#f5c96a"/>
+          <ellipse class="flame f2" cx="0" cy="10" rx="2.4" ry="6" fill="#fff3d0"/>
+        </g>
+      </svg>
+    </div>
+
+    <!-- 質問選択 -->
+    <div id="qselect">
+      <p class="q-lead">今宵は何をお知りになりたいですか。<br>問いをひとつ、お選びください。</p>
+      <button class="qbtn" onclick="setQ(0)">お相手はいま、私をどう想っている？</button>
+      <button class="qbtn" onclick="setQ(1)">私たちは、復縁できる？</button>
+      <button class="qbtn" onclick="setQ(2)">いま、連絡してもいい？</button>
+      <button class="qbtn" onclick="setQ(3)">二人の縁は、これからどうなる？</button>
+    </div>
+
+    <!-- カードの扇 -->
+    <div id="fanarea" class="hidden">
+      <p class="fan-lead">気になるカードを<b>3枚</b>選んでください<span id="fancnt"></span></p>
+      <div id="fan"></div>
+      <button class="btn-outline hidden" id="openbtn" onclick="goOpen()">カードをひらく</button>
+    </div>
+
+    <div class="steps">
+      <div class="st now"><span class="ic">☾</span>選ぶ</div><div class="dots-line"></div>
+      <div class="st"><span class="ic">✧</span>開く</div><div class="dots-line"></div>
+      <div class="st"><span class="ic">☀</span>読む</div>
+    </div>
+  </section>
+
+  <!-- ======== STEP2: 開く ======== -->
+  <section id="scr-open" class="hidden">
+    <div class="pill">カードが選ばれました…</div>
+    <div class="spread" id="spread"></div>
+    <p class="fan-lead" id="openlead" style="margin-top:18px">カードに触れて、めくってください</p>
+    <button class="btn-outline hidden" id="readbtn" onclick="goRead()">メッセージを読む</button>
+    <div class="steps">
+      <div class="st"><span class="ic">☾</span>選ぶ</div><div class="dots-line"></div>
+      <div class="st now"><span class="ic">✧</span>開く</div><div class="dots-line"></div>
+      <div class="st"><span class="ic">☀</span>読む</div>
+    </div>
+  </section>
+
+  <!-- ======== STEP3: 読む ======== -->
+  <section id="scr-read" class="hidden">
+    <div class="pill">三枚のカードがこたえを示しました</div>
+
+    <div class="panel">
+      <span class="cor a">✦</span><span class="cor b">✦</span><span class="cor c">✦</span><span class="cor d">✦</span>
+      <h4><span class="s">✧</span> カードからのメッセージ <span class="s">✧</span></h4>
+      <p id="msg"></p>
+      <div class="divider"></div>
+      <div class="verdict"><span class="ic">☾⋆</span><span id="verdict"></span></div>
+    </div>
+
+    <div class="pill" style="margin-top:30px">✦ 特別鑑定のご案内 ✦</div>
+    <h2 class="cta-head">ここから先は、<br>あなただけの個別鑑定です</h2>
+    <p class="cta-sub">選ばれたカードをもとに、<br>お相手の本音・連絡のタイミング・<br>復縁への具体的な一歩をお伝えします。</p>
+
+    <div class="benefit"><span class="bi"><svg><use href="#bi-heart"/></svg></span>お相手の本音がわかる</div>
+    <div class="benefit"><span class="bi"><svg><use href="#bi-clock"/></svg></span>連絡するベストな時期がわかる</div>
+    <div class="benefit"><span class="bi"><svg><use href="#bi-compass"/></svg></span>今やるべき行動が明確になる</div>
+
+    <div class="ctabox">
+      <h3><span class="s">✦</span> 無料で本格鑑定を受ける <span class="s">✦</span></h3>
+      <button class="btn-line" onclick="openLine()"><span class="lg">LINE</span>LINEで無料本格鑑定を受ける</button>
+      <div class="note">※この画面のスクリーンショットを送ってください</div>
+    </div>
+
+    <button class="ghostlink" onclick="location.reload()">もう一度ひく</button>
+
+    <div class="steps">
+      <div class="st"><span class="ic">☾</span>選ぶ</div><div class="dots-line"></div>
+      <div class="st"><span class="ic">✧</span>開く</div><div class="dots-line"></div>
+      <div class="st now"><span class="ic">☀</span>読む</div>
+    </div>
+
+    <footer>
+      本占いはエンターテインメントを目的としたものであり、未来や結果を保証するものではありません。<br>
+      入力・選択された内容は端末内でのみ処理され、外部に送信・保存されることは一切ありません。
+    </footer>
+  </section>
+</div>
+
+<script>
+/* ================= 設定 ================= */
+var LINE_URL = "https://lin.ee/62Yzy0tR"; // 公式LINE友だち追加URL（設定済み）
+
+/* ================= 星空 ================= */
+(function(){
+  var sky=document.getElementById("sky");
+  for(var i=0;i<70;i++){
+    var s=document.createElement("i"); s.className="star";
+    var sz=(Math.random()*2+.7).toFixed(1);
+    s.style.width=sz+"px"; s.style.height=sz+"px";
+    s.style.left=(Math.random()*100).toFixed(2)+"%";
+    s.style.top=(Math.random()*100).toFixed(2)+"%";
+    s.style.animationDelay=(Math.random()*4).toFixed(2)+"s";
+    sky.appendChild(s);
+  }
+})();
+
+/* ================= 大アルカナ22枚 ================= */
+/* s:希望スコア(0-5) t:読み解き（名詞句で終える） em:絵柄 */
+var DECK=[
+ {name:"愚者",num:"0",em:"em-sun",up:{s:4,t:"新しい一歩を踏み出そうとする、自由で澄んだ力"},rv:{s:2,t:"焦りが生む空回りと、一度立ち止まる必要"}},
+ {name:"魔術師",num:"I",em:"em-inf",up:{s:5,t:"想いを現実に変えていく創造の力"},rv:{s:2,t:"伝えたいのに伝わらない、言葉のすれ違い"}},
+ {name:"女教皇",num:"II",em:"em-moon",up:{s:4,t:"静けさの中で育つ、深い直感と理解"},rv:{s:2,t:"考えすぎて動けなくなった心のもつれ"}},
+ {name:"女帝",num:"III",em:"em-heart",up:{s:5,t:"受け止め、包み込む豊かな愛情"},rv:{s:3,t:"与えすぎて少し疲れてしまった優しさ"}},
+ {name:"皇帝",num:"IV",em:"em-tower",up:{s:4,t:"関係を支えようとする強い責任感"},rv:{s:2,t:"意地とプライドが生んだ小さな距離"}},
+ {name:"教皇",num:"V",em:"em-lantern",up:{s:4,t:"信頼と誠実さで結ばれてきた縁"},rv:{s:2,t:"周囲の目や常識にしばられた息苦しさ"}},
+ {name:"恋人",num:"VI",em:"em-heart",up:{s:5,t:"心が通い合う、まっすぐな愛の共鳴"},rv:{s:2,t:"気持ちのすれ違いと、答えの出ない迷い"}},
+ {name:"戦車",num:"VII",em:"em-star",up:{s:4,t:"前へ進もうとする勢いと情熱"},rv:{s:2,t:"急ぎすぎたことによる小さな衝突"}},
+ {name:"力",num:"VIII",em:"em-inf",up:{s:4,t:"静かに信じて待てる、しなやかな強さ"},rv:{s:2,t:"不安に飲み込まれそうになっている心"}},
+ {name:"隠者",num:"IX",em:"em-lantern",up:{s:3,t:"ひとりの時間の中で深まっていく気づき"},rv:{s:2,t:"閉じこもりすぎてしまった孤独"}},
+ {name:"運命の輪",num:"X",em:"em-wheel",up:{s:5,t:"動き始めた運命の流れと、巡り来る好機"},rv:{s:2,t:"タイミングのずれ。まだ機が熟していない兆し"}},
+ {name:"正義",num:"XI",em:"em-scale",up:{s:3,t:"感情に流されず関係を見つめ直す冷静さ"},rv:{s:2,t:"どちらかに傾いたまま戻らない天秤"}},
+ {name:"吊るされた男",num:"XII",em:"em-moon",up:{s:3,t:"動けない時間が与えてくれる、新しい視点"},rv:{s:2,t:"報われにくい我慢と停滞感"}},
+ {name:"死神",num:"XIII",em:"em-moon",up:{s:3,t:"古い形の終わりと、再生への静かな入り口"},rv:{s:2,t:"過去への執着が生んでいる足踏み"}},
+ {name:"節制",num:"XIV",em:"em-cup",up:{s:4,t:"ゆっくりと心を通わせ直す、穏やかな調和"},rv:{s:2,t:"気持ちのペースが噛み合わない揺らぎ"}},
+ {name:"悪魔",num:"XV",em:"em-moon",up:{s:2,t:"離れられないほど強い、情の深さと執着"},rv:{s:3,t:"執着の鎖がほどけ、自由になり始めた心"}},
+ {name:"塔",num:"XVI",em:"em-tower",up:{s:2,t:"突然の別れがもたらした大きな衝撃"},rv:{s:3,t:"壊れたものの中から立ち上がろうとする兆し"}},
+ {name:"星",num:"XVII",em:"em-star",up:{s:5,t:"未来を静かに照らし続ける希望の光"},rv:{s:3,t:"見失いかけているだけで、消えてはいない希望"}},
+ {name:"月",num:"XVIII",em:"em-moon",up:{s:2,t:"言葉にならない不安と、揺れ続ける心"},rv:{s:4,t:"霧が晴れて真実が見え始める、夜明けの気配"}},
+ {name:"太陽",num:"XIX",em:"em-sun",up:{s:5,t:"照らし合い、笑い合えた輝きの記憶"},rv:{s:3,t:"雲に隠れているだけで、消えていない温もり"}},
+ {name:"審判",num:"XX",em:"em-angel",up:{s:5,t:"一度終わった縁がよみがえる、再会の呼び声"},rv:{s:3,t:"過去の整理を終えたあとに訪れる復活"}},
+ {name:"世界",num:"XXI",em:"em-world",up:{s:5,t:"ひとつの物語の完成と、満ち足りた結びつき"},rv:{s:3,t:"あと一歩のところで待っている、未完の結末"}}
+];
+var QUESTIONS=[
+ "お相手はいま、私をどう想っている？",
+ "私たちは、復縁できる？",
+ "いま、連絡してもいい？",
+ "二人の縁は、これからどうなる？"
+];
+var POS=["過去","現在","未来"];
+
+var qIdx=null, picked=[], drawn=[], openedCnt=0;
+
+/* ================= STEP1: 質問→扇 ================= */
+function setQ(i){
+  qIdx=i;
+  document.getElementById("qselect").classList.add("hidden");
+  document.getElementById("fanarea").classList.remove("hidden");
+  buildFan();
+}
+function buildFan(){
+  var fan=document.getElementById("fan");
+  var N=22, R=560;
+  for(var i=0;i<N;i++){
+    var a=(-19 + 38*i/(N-1));            // -19°〜+19°（大きな半径のゆるやかな弧）
+    var rad=a*Math.PI/180;
+    var x=Math.sin(rad)*R;
+    var y=(Math.cos(rad)-1)*R;
+    var el=document.createElement("div");
+    el.className="fcard";
+    el.style.zIndex=i;
+    el.style.transform="translate("+x.toFixed(1)+"px,"+y.toFixed(1)+"px) rotate("+a.toFixed(1)+"deg)";
+    el.dataset.base=el.style.transform;
+    el.innerHTML='<svg viewBox="0 0 62 100"><use href="#cardback"/></svg>'
+      +'<img class="cardimg" src="cards/back.jpg" alt="" onerror="this.remove()">';
+    el.onclick=(function(node){return function(){toggleCard(node);};})(el);
+    fan.appendChild(el);
+  }
+}
+function toggleCard(el){
+  if(el.classList.contains("on")){
+    el.classList.remove("on");
+    el.style.transform=el.dataset.base;
+    el.querySelector("use").setAttribute("href","#cardback");
+    picked=picked.filter(function(p){return p!==el;});
+  }else{
+    if(picked.length>=3) return;
+    el.classList.add("on");
+    el.style.transform=el.dataset.base+" translateY(-26px) scale(1.12)";
+    el.querySelector("use").setAttribute("href","#cardback-lav");
+    picked.push(el);
+  }
+  var left=3-picked.length;
+  document.getElementById("fancnt").textContent = left>0 ? "（あと"+left+"枚）" : "";
+  document.getElementById("openbtn").classList.toggle("hidden", picked.length!==3);
+}
+
+/* ================= STEP2: 開く ================= */
+function goOpen(){
+  /* 山札から3枚抽選（正逆は3割で逆位置） */
+  var idx=[]; while(idx.length<3){ var r=Math.floor(Math.random()*22); if(idx.indexOf(r)<0) idx.push(r); }
+  drawn=idx.map(function(i){ return {c:DECK[i], i:i, rev:Math.random()<0.3}; });
+
+  var sp=document.getElementById("spread"), h="";
+  for(var i=0;i<3;i++){
+    var d=drawn[i];
+    var nn=("0"+d.i).slice(-2);
+    h+='<div class="slot"><div class="pos">'+POS[i]+'</div>'
+      +'<div class="flip" id="flip'+i+'" onclick="openCard('+i+')"><div class="fin">'
+      +'<div class="face back"><svg viewBox="0 0 62 100"><use href="#cardback"/></svg>'
+        +'<img class="cardimg" src="cards/back.jpg" alt="" onerror="this.remove()"></div>'
+      +'<div class="face front'+(d.rev?" rev":"")+'">'
+        +'<div class="nm">'+d.c.name+'</div>'
+        +'<div class="emblem"><svg viewBox="0 0 64 64"><use href="#'+d.c.em+'" width="64" height="64"/></svg></div>'
+        +'<div class="num">'+d.c.num+'</div>'
+        +'<img class="cardimg" src="cards/'+nn+'.jpg" alt="'+d.c.name+'" onerror="this.remove()">'
+      +'</div></div></div>'
+      +'<div class="rd" id="rd'+i+'"></div></div>';
+  }
+  sp.innerHTML=h;
+  show("scr-open");
+}
+function openCard(i){
+  var f=document.getElementById("flip"+i);
+  if(f.classList.contains("open")) return;
+  f.classList.add("open");
+  var d=drawn[i];
+  document.getElementById("rd"+i).innerHTML=d.c.name+(d.rev?"<b>（逆位置）</b>":"");
+  openedCnt++;
+  if(openedCnt>=3){
+    document.getElementById("openlead").classList.add("hidden");
+    document.getElementById("readbtn").classList.remove("hidden");
+  }
+}
+
+/* ================= STEP3: 読む ================= */
+function goRead(){
+  var t=drawn.map(function(d){return d.rev?d.c.rv:d.c.up;});
+  var score=t[0].s+t[1].s+t[2].s;
+  var msg="「"+QUESTIONS[qIdx]+"」——その問いに、三枚のカードがこたえました。<br><br>"
+    +"お二人の過去にあったのは、"+t[0].t+"。<br>"
+    +"いま流れているのは、"+t[1].t+"。<br>"
+    +"そしてこの先に待つのは、"+t[2].t+"。";
+  var v = score>=11 ? "復縁の可能性は、十分にあります。"
+        : score>=7  ? "縁は生きています。鍵は、動く時期にあります。"
+                    : "いまは流れを整える時期。この縁は、まだ終わっていません。";
+  document.getElementById("msg").innerHTML=msg;
+  document.getElementById("verdict").textContent=v;
+  show("scr-read");
+}
+
+/* ================= 共通 ================= */
+function show(id){
+  ["scr-pick","scr-open","scr-read"].forEach(function(s){document.getElementById(s).classList.add("hidden");});
+  document.getElementById(id).classList.remove("hidden");
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function openLine(){ window.open(LINE_URL,"_blank"); }
+</script>
+</body>
+</html>

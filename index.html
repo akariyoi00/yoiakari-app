@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>復縁可能性診断🌙｜30秒でわかる、お二人の縁のいま</title>
+<meta name="description" content="生年月日と10の質問から、お二人の復縁可能性とタイプを無料診断。復縁専門占い師・灯（あかり）監修。">
+<meta property="og:title" content="復縁可能性診断🌙">
+<meta property="og:description" content="30秒でわかる、お二人の縁のいま。無料・登録不要。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --night:#251d47; --night-2:#332a5e; --night-3:#3d3370;
+    --cream:#f7efdf; --cream-2:#fcf6e9; --cream-dim:#efe3ce;
+    --navy:#2b2350; --navy-soft:#453a6e;
+    --gold:#d9a94a; --gold-line:#c9a35c; --gold-pale:#e8cf9a;
+    --pink:#e8607e; --pink-deep:#d94f6c; --pink-pale:#f3ccd7;
+    --serif:"Shippori Mincho","Hiragino Mincho ProN","Yu Mincho","YuMincho",serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html{background:var(--night)}
+  body{
+    font-family:var(--serif); color:var(--cream); min-height:100vh;
+    background:linear-gradient(180deg,#241c45 0%,#2c2455 45%,#332a5e 100%);
+    background-attachment:fixed; letter-spacing:.04em;
+  }
+  /* ===== night sky ===== */
+  #sky{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+  #sky .nebula{position:absolute;inset:0;
+    background:
+      radial-gradient(42% 30% at 82% 22%, rgba(190,120,200,.14), transparent 70%),
+      radial-gradient(50% 34% at 12% 78%, rgba(160,100,190,.12), transparent 70%),
+      radial-gradient(30% 22% at 70% 85%, rgba(232,96,126,.08), transparent 70%);
+  }
+  #sky .grain{position:absolute;inset:0;opacity:.05;
+    background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2"/></filter><rect width="180" height="180" filter="url(%23n)"/></svg>');
+  }
+  .star{position:absolute;background:#f4e9c9;border-radius:50%;animation:tw 3.4s ease-in-out infinite}
+  @keyframes tw{0%,100%{opacity:.85}50%{opacity:.18}}
+  .wrap{position:relative;z-index:1;max-width:480px;margin:0 auto;padding:26px 22px 56px}
+  .hidden{display:none!important}
+  /* ===== shared ===== */
+  .goldrule{display:flex;align-items:center;gap:12px;justify-content:center;color:var(--gold-pale);font-size:12px;letter-spacing:.18em}
+  .goldrule::before,.goldrule::after{content:"";height:1px;width:52px;background:linear-gradient(90deg,transparent,var(--gold-line));display:block}
+  .goldrule::after{background:linear-gradient(90deg,var(--gold-line),transparent)}
+  .btn{
+    display:block;width:100%;border:none;cursor:pointer;text-align:center;font-family:var(--serif);
+    background:linear-gradient(100deg,#e05a7d 0%,#e0906a 55%,#dcae56 100%);
+    color:#fff;font-size:21px;font-weight:700;letter-spacing:.22em;text-indent:.22em;
+    padding:19px 10px;border-radius:999px;position:relative;
+    box-shadow:0 10px 28px rgba(216,90,120,.35), inset 0 0 0 1px rgba(255,240,210,.45);
+  }
+  .btn::before,.btn::after{content:"✦";position:absolute;top:50%;transform:translateY(-50%);font-size:11px;color:rgba(255,244,220,.9)}
+  .btn::before{left:22px} .btn::after{right:22px}
+  .btn:active{transform:scale(.98)}
+  .btn.line{background:linear-gradient(180deg,#3ec14c,#0faf3f);box-shadow:0 8px 22px rgba(20,160,60,.4), inset 0 0 0 1px rgba(255,255,255,.35);letter-spacing:.08em;text-indent:0;font-size:19px}
+  .btn.ghost{background:transparent;color:var(--gold-pale);box-shadow:none;border:1px solid rgba(201,163,92,.55);font-size:15px;letter-spacing:.14em;padding:15px}
+  .btn.ghost::before,.btn.ghost::after{content:""}
+  .backlink{background:none;border:none;color:rgba(247,239,223,.62);font-size:14px;margin:26px auto 0;cursor:pointer;font-family:var(--serif);display:block;letter-spacing:.1em}
+  /* ===== intro ===== */
+  .intro{text-align:center;padding-top:4px}
+  .moonart{width:210px;height:170px;margin:0 auto -6px;display:block}
+  .intro h1{font-size:39px;font-weight:800;letter-spacing:.1em;color:#f6eeda;text-shadow:0 0 22px rgba(217,169,74,.25)}
+  .intro .sub{font-size:14.5px;color:rgba(247,239,223,.85);margin-top:12px;letter-spacing:.12em}
+  .tarot-visual{
+    width:min(78%,290px);margin:26px auto 0;aspect-ratio:290/380;border-radius:18px;
+    background:linear-gradient(160deg,#f9f2e2,#f2e7cd);position:relative;
+    box-shadow:0 18px 44px rgba(10,6,30,.5), inset 0 0 0 1px rgba(201,163,92,.7);
+    padding:10px;
+  }
+  .tarot-visual .inner{position:absolute;inset:10px;border:1px solid rgba(201,163,92,.85);border-radius:12px}
+  .tarot-visual svg{position:absolute;inset:0;width:100%;height:100%}
+  .intro .btn{margin-top:30px}
+  .intro .super{margin-top:20px}
+  .intro-notes{
+    margin:26px auto 0;display:table;text-align:left;
+    font-size:11.5px;font-weight:500;color:rgba(247,239,223,.62);
+  }
+  .intro-notes p{line-height:1.9;margin-bottom:7px;padding-left:1.3em;text-indent:-1.3em;letter-spacing:.05em}
+  /* ===== quiz ===== */
+  .progress{height:7px;background:rgba(247,239,223,.16);border-radius:99px;overflow:hidden;box-shadow:inset 0 0 0 1px rgba(201,163,92,.35)}
+  .progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold),var(--pink));border-radius:99px;transition:width .35s ease}
+  .stepnum{font-size:17px;color:var(--gold-pale);text-align:right;margin:12px 2px 6px;letter-spacing:.12em}
+  .q-title{font-size:26px;font-weight:700;color:#f6eeda;line-height:1.7;margin:10px 0 26px;letter-spacing:.06em}
+  .q-title small{display:block;font-weight:500;font-size:12.5px;color:rgba(247,239,223,.62);margin-top:12px;letter-spacing:.08em}
+  .opt{
+    display:flex;align-items:center;gap:12px;width:100%;text-align:left;cursor:pointer;
+    font-family:var(--serif);font-size:18px;font-weight:600;color:var(--navy);letter-spacing:.05em;
+    background:linear-gradient(180deg,#faf3e3,#f2e7cf);
+    border:none;border-radius:20px;padding:24px 22px;margin-bottom:15px;
+    box-shadow:0 8px 20px rgba(10,6,30,.35), inset 0 0 0 1px rgba(201,163,92,.25);
+    transition:transform .12s;
+    position:relative;
+  }
+  .opt .oc{width:24px;height:24px;flex:0 0 24px;display:none}
+  .opt.sel{box-shadow:0 8px 20px rgba(10,6,30,.35), inset 0 0 0 2.5px var(--pink), inset 0 0 0 6px #fff}
+  .opt.sel .oc{display:block}
+  .opt:active{transform:scale(.985)}
+  input[type=date]{
+    width:100%;font-size:19px;padding:20px 18px;border:none;border-radius:20px;
+    background:linear-gradient(180deg,#faf3e3,#f2e7cf);color:var(--navy);font-family:var(--serif);
+    box-shadow:0 8px 20px rgba(10,6,30,.35), inset 0 0 0 1px rgba(201,163,92,.35);
+    appearance:none;-webkit-appearance:none;min-height:64px;
+  }
+  input[type=date]:focus{outline:none;box-shadow:0 8px 20px rgba(10,6,30,.35), inset 0 0 0 2.5px var(--pink)}
+  #scr-quiz .btn{margin-top:24px}
+  /* ===== analyzing ===== */
+  .analyzing{text-align:center;padding:11vh 10px 0}
+  .analyzing .orb{width:min(86%,320px);margin:0 auto;display:block;animation:slowspin 26s linear infinite;transform-origin:center}
+  @keyframes slowspin{to{transform:rotate(360deg)}}
+  .analyzing .orb .moonfix{animation:counterspin 26s linear infinite;transform-box:fill-box;transform-origin:center}
+  @keyframes counterspin{to{transform:rotate(-360deg)}}
+  .analyzing .ribbon{width:190px;margin:26px auto 0;display:block}
+  .analyzing p{margin-top:26px;color:#f0e7d2;font-size:17px;letter-spacing:.14em}
+  .dots{margin-top:20px;display:flex;gap:12px;justify-content:center}
+  .dots i{width:7px;height:7px;border-radius:50%;background:var(--gold);animation:dt 1.2s ease-in-out infinite}
+  .dots i:nth-child(2){animation-delay:.2s}.dots i:nth-child(3){animation-delay:.4s}
+  @keyframes dt{0%,100%{opacity:.25}50%{opacity:1}}
+  /* ===== result ===== */
+  .hero{
+    background:linear-gradient(165deg,#f9f2e2,#f1e5c9);border-radius:22px;
+    padding:30px 22px 30px;position:relative;text-align:center;color:var(--navy);
+    box-shadow:0 18px 44px rgba(10,6,30,.5), inset 0 0 0 1px rgba(201,163,92,.7);
+  }
+  .hero .frame{position:absolute;inset:9px;border:1px solid rgba(201,163,92,.75);border-radius:15px;pointer-events:none}
+  .hero .fs{position:absolute;width:20px;height:20px;fill:var(--gold-line);opacity:.9}
+  .hero .fs.tl{top:16px;left:16px}.hero .fs.tr{top:16px;right:16px}
+  .hero .fs.bl{bottom:16px;left:16px}.hero .fs.br{bottom:16px;right:16px}
+  .r-label{
+    display:inline-block;background:var(--navy);color:#f3ead5;font-size:13px;
+    padding:9px 26px;border-radius:99px;letter-spacing:.42em;text-indent:.42em;
+    box-shadow:inset 0 0 0 1px rgba(201,163,92,.8);
+  }
+  .ring-box{position:relative;width:216px;height:216px;margin:20px auto 4px}
+  .ring-box svg{transform:rotate(-90deg)}
+  .ring-bg{fill:none;stroke:#e9dcc0;stroke-width:17}
+  .ring-fg{fill:none;stroke:url(#rg);stroke-width:17;stroke-linecap:round;transition:stroke-dashoffset 1.6s cubic-bezier(.22,.8,.35,1)}
+  .ring-txt{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--navy)}
+  .ring-txt b{font-size:64px;font-weight:800;line-height:1}
+  .ring-txt b small{font-size:26px;font-weight:700}
+  .ring-txt span{font-size:16px;font-weight:700;margin-top:6px;letter-spacing:.14em}
+  .type-name{font-size:33px;font-weight:800;color:var(--navy);margin-top:16px;letter-spacing:.08em}
+  .type-head{font-size:15px;color:var(--pink-deep);font-weight:700;margin-top:12px;letter-spacing:.14em}
+  .reading{
+    background:linear-gradient(165deg,#f9f2e2,#f2e7cf);border-radius:20px;margin-top:16px;
+    padding:24px 22px;color:var(--navy);box-shadow:0 12px 30px rgba(10,6,30,.4), inset 0 0 0 1px rgba(201,163,92,.5);
+  }
+  .reading h4{font-size:15px;letter-spacing:.22em;color:var(--pink-deep);margin-bottom:12px;text-align:center}
+  .reading p{font-size:14.5px;line-height:2.15;font-weight:500;text-align:left}
+  .sec-title{
+    display:flex;align-items:center;gap:14px;justify-content:center;
+    font-size:20px;font-weight:700;color:#f4ecd8;letter-spacing:.2em;margin:34px 0 18px;
+  }
+  .sec-title::before,.sec-title::after{content:"✦";color:var(--gold);font-size:13px}
+  .bar-card{
+    display:flex;align-items:center;gap:14px;
+    background:linear-gradient(180deg,#faf3e3,#f2e7cf);border-radius:16px;
+    padding:19px 18px;margin-bottom:12px;color:var(--navy);
+    box-shadow:0 8px 20px rgba(10,6,30,.35), inset 0 0 0 1px rgba(201,163,92,.3);
+  }
+  .bar-card .lb{font-size:15.5px;font-weight:700;white-space:nowrap;letter-spacing:.04em}
+  .bar-card .lb b{font-size:17px}
+  .bar-card .lb small{font-size:11px;font-weight:600;color:#8a7d63}
+  .bar-card .bar{flex:1;height:12px;background:#e7d9ba;border-radius:99px;overflow:hidden}
+  .bar-card .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold),var(--pink));border-radius:99px;transition:width 1.2s ease .4s}
+  .pinkbox{
+    background:linear-gradient(180deg,#f6d6de,#f0c6d2);border-radius:16px;
+    padding:21px 20px 21px 56px;margin-top:14px;color:#59284a;position:relative;
+    box-shadow:0 8px 20px rgba(10,6,30,.35), inset 0 0 0 1px rgba(217,79,108,.25);
+  }
+  .pinkbox svg{position:absolute;left:18px;top:22px;width:24px;height:24px;fill:#d98aa4}
+  .pinkbox h5{font-size:16.5px;font-weight:800;letter-spacing:.08em;margin-bottom:8px}
+  .pinkbox div{font-size:13.5px;line-height:2;font-weight:600}
+  .pinkbox div b{color:var(--pink-deep)}
+  .cta{
+    margin-top:22px;border-radius:22px;padding:28px 22px;text-align:center;position:relative;
+    background:linear-gradient(170deg,#241c45,#31275c);
+    box-shadow:inset 0 0 0 1px rgba(201,163,92,.65), 0 14px 34px rgba(10,6,30,.5);
+  }
+  .cta::before{content:"";position:absolute;inset:8px;border:1px solid rgba(201,163,92,.35);border-radius:16px;pointer-events:none}
+  .cta h3{font-size:18.5px;line-height:1.9;letter-spacing:.1em;color:#f4ecd8;font-weight:700}
+  .cta p{font-size:12.5px;line-height:2;color:rgba(247,239,223,.82);margin-top:12px;font-weight:500}
+  .cta .btn{margin-top:18px}
+  .cta .note{font-size:11.5px;color:rgba(247,239,223,.72);margin-top:13px;letter-spacing:.06em}
+  #scr-result .btn.ghost{margin-top:16px}
+  footer{font-size:10.5px;color:rgba(247,239,223,.5);line-height:2;text-align:center;padding:22px 6px 0;font-weight:500}
+</style>
+</head>
+<body>
+<div id="sky"><div class="nebula"></div><div class="grain"></div></div>
+
+<!-- 共有SVG定義 -->
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <linearGradient id="rg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#d9a94a"/><stop offset="100%" stop-color="#e8607e"/>
+    </linearGradient>
+    <linearGradient id="mg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#eec779"/><stop offset="100%" stop-color="#d99b3f"/>
+    </linearGradient>
+    <mask id="crescent"><rect x="0" y="0" width="200" height="200" fill="#fff"/><circle cx="128" cy="82" r="74" fill="#000"/></mask>
+    <symbol id="star8" viewBox="-32 -32 64 64">
+      <path d="M0,-30 L5,-5 L30,0 L5,5 L0,30 L-5,5 L-30,0 L-5,-5 Z"/>
+      <path d="M0,-14 L3,-3 L14,0 L3,3 L0,14 L-3,3 L-14,0 L-3,-3 Z" transform="rotate(45)"/>
+    </symbol>
+    <symbol id="sparkle4" viewBox="-16 -16 32 32"><path d="M0,-14 L3,-3 L14,0 L3,3 L0,14 L-3,3 L-14,0 L-3,-3 Z"/></symbol>
+    <symbol id="ico-moon" viewBox="0 0 24 24"><path d="M20.2,15.1A9,9,0,0,1,8.9,3.8,9.3,9.3,0,0,0,3,12.4,9.2,9.2,0,0,0,12.3,21,9.3,9.3,0,0,0,20.2,15.1Z"/></symbol>
+    <symbol id="ico-candle" viewBox="0 0 24 24"><path d="M12,2c-1.2,1.6-2.2,2.9-2.2,4.2A2.2,2.2,0,0,0,12,8.4a2.2,2.2,0,0,0,2.2-2.2C14.2,4.9,13.2,3.6,12,2Zm-2.6,8.4V20a1.6,1.6,0,0,0,1.6,1.6h2A1.6,1.6,0,0,0,14.6,20V10.4Z"/></symbol>
+    <symbol id="ico-ribbon" viewBox="0 0 120 60">
+      <g fill="none" stroke="#d94f6c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M60,26 C38,6 14,16 34,30 C14,44 44,48 60,30"/>
+        <path d="M60,26 C82,6 106,16 86,30 C106,44 76,48 60,30"/>
+        <path d="M56,30 C48,42 40,50 30,56"/>
+        <path d="M64,30 C72,42 80,50 90,56"/>
+        <circle cx="60" cy="28" r="4" fill="#d94f6c"/>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="wrap">
+
+  <!-- ============ intro ============ -->
+  <div class="intro" id="scr-intro">
+    <svg class="moonart" viewBox="0 0 200 165">
+      <g fill="none" stroke="#caa35c" stroke-width="1">
+        <ellipse cx="100" cy="82" rx="88" ry="56" stroke-dasharray="1 7" opacity=".8"/>
+        <ellipse cx="100" cy="82" rx="66" ry="40" stroke-dasharray="1 6" opacity=".55" transform="rotate(-12 100 82)"/>
+      </g>
+      <g transform="translate(58,30) scale(.52)" >
+        <circle cx="100" cy="100" r="72" fill="url(#mg)" mask="url(#crescent)"/>
+      </g>
+      <g fill="#e8cf9a">
+        <use href="#star8" x="-13" y="-13" width="26" height="26" transform="translate(160,38)"/>
+        <use href="#sparkle4" x="-8" y="-8" width="16" height="16" transform="translate(30,58)"/>
+        <use href="#sparkle4" x="-6" y="-6" width="12" height="12" transform="translate(148,118)"/>
+        <use href="#sparkle4" x="-5" y="-5" width="10" height="10" transform="translate(66,140)"/>
+        <circle cx="188" cy="82" r="2.4"/><circle cx="14" cy="96" r="1.8"/><circle cx="118" cy="12" r="1.8"/>
+      </g>
+    </svg>
+    <h1>復縁可能性診断</h1>
+    <div class="sub">30秒でわかる、お二人の縁のいま</div>
+
+    <div class="tarot-visual">
+      <div class="inner"></div>
+      <svg viewBox="0 0 290 380">
+        <g fill="none" stroke="#caa35c" stroke-width="1" opacity=".7">
+          <ellipse cx="145" cy="190" rx="118" ry="72" stroke-dasharray="1 6" transform="rotate(-24 145 190)"/>
+          <ellipse cx="145" cy="190" rx="96" ry="52" stroke-dasharray="1 6" transform="rotate(18 145 190)"/>
+        </g>
+        <path d="M96,86 C120,130 108,158 140,182 M152,196 C182,224 196,262 206,300"
+              fill="none" stroke="#d94f6c" stroke-width="2.2" stroke-linecap="round" opacity=".9"/>
+        <use href="#ico-ribbon" x="85" y="160" width="120" height="60"/>
+        <g fill="#caa35c">
+          <use href="#star8" x="-26" y="-26" width="52" height="52" transform="translate(92,80)"/>
+          <use href="#star8" x="-22" y="-22" width="44" height="44" transform="translate(210,306)"/>
+          <use href="#sparkle4" x="-7" y="-7" width="14" height="14" transform="translate(228,96)"/>
+          <use href="#sparkle4" x="-6" y="-6" width="12" height="12" transform="translate(58,286)"/>
+          <use href="#sparkle4" x="-5" y="-5" width="10" height="10" transform="translate(150,58)"/>
+          <circle cx="242" cy="196" r="2.2"/><circle cx="48" cy="150" r="1.8"/><circle cx="140" cy="330" r="1.8"/>
+        </g>
+      </svg>
+    </div>
+
+    <button class="btn" onclick="start()">診断をはじめる</button>
+    <div class="goldrule super">監修：復縁専門占い師・灯</div>
+
+    <div class="intro-notes">
+      <p>※ 診断は約30秒で完了します</p>
+      <p>※ 無料・登録不要でご利用いただけます</p>
+      <p>※ 入力情報は端末内でのみ処理され、送信・保存されません</p>
+    </div>
+  </div>
+
+  <!-- ============ quiz ============ -->
+  <div class="hidden" id="scr-quiz">
+    <div class="progress"><i id="prog"></i></div>
+    <div class="stepnum" id="stepnum"></div>
+    <div id="q-area"></div>
+    <button class="backlink hidden" id="backbtn" onclick="goBack()">← ひとつ前にもどる</button>
+  </div>
+
+  <!-- ============ analyzing ============ -->
+  <div class="analyzing hidden" id="scr-wait">
+    <svg class="orb" viewBox="0 0 320 320">
+      <g fill="none" stroke="#caa35c" stroke-width="1">
+        <circle cx="160" cy="160" r="140" stroke-dasharray="2 9" opacity=".7"/>
+        <circle cx="160" cy="160" r="112" stroke-dasharray="2 8" opacity=".5"/>
+      </g>
+      <g fill="#e8cf9a">
+        <use href="#star8" x="-11" y="-11" width="22" height="22" transform="translate(160,20)"/>
+        <use href="#sparkle4" x="-8" y="-8" width="16" height="16" transform="translate(48,110)"/>
+        <use href="#sparkle4" x="-7" y="-7" width="14" height="14" transform="translate(282,196)"/>
+        <circle cx="238" cy="52" r="2.6"/><circle cx="70" cy="252" r="2.2"/><circle cx="160" cy="300" r="2"/>
+      </g>
+      <g transform="translate(60,60)"><g class="moonfix">
+        <circle cx="100" cy="100" r="86" fill="url(#mg)" mask="url(#crescent)"/>
+      </g></g>
+    </svg>
+    <svg class="ribbon" viewBox="0 0 120 60"><use href="#ico-ribbon" width="120" height="60"/></svg>
+    <p id="wait-msg">お二人の星の配置を読んでいます…</p>
+    <div class="dots"><i></i><i></i><i></i></div>
+  </div>
+
+  <!-- ============ result ============ -->
+  <div id="scr-result" class="hidden">
+    <div class="hero">
+      <div class="frame"></div>
+      <svg class="fs tl"><use href="#sparkle4"  x="2" y="2" width="16" height="16"/></svg>
+      <svg class="fs tr"><use href="#sparkle4" x="2" y="2" width="16" height="16"/></svg>
+      <svg class="fs bl"><use href="#sparkle4" x="2" y="2" width="16" height="16"/></svg>
+      <svg class="fs br"><use href="#sparkle4" x="2" y="2" width="16" height="16"/></svg>
+      <span class="r-label">鑑定結果</span>
+      <div class="ring-box">
+        <svg width="216" height="216">
+          <circle class="ring-bg" cx="108" cy="108" r="90"/>
+          <circle class="ring-fg" id="ring" cx="108" cy="108" r="90"/>
+        </svg>
+        <div class="ring-txt"><b><span id="pct">0</span><small>%</small></b><span>復縁可能性</span></div>
+      </div>
+      <div class="type-name" id="type-name"></div>
+      <div class="type-head" id="type-head"></div>
+    </div>
+
+    <div class="reading">
+      <h4>— 灯の読み解き —</h4>
+      <p id="type-body"></p>
+    </div>
+
+    <div class="sec-title">縁のバランス</div>
+    <div id="bars"></div>
+
+    <div class="pinkbox">
+      <svg><use href="#ico-moon"/></svg>
+      <h5>いま、やってはいけないこと</h5>
+      <div id="type-ng"></div>
+    </div>
+    <div class="pinkbox">
+      <svg><use href="#sparkle4"/></svg>
+      <h5>最初の一歩</h5>
+      <div id="type-step"></div>
+    </div>
+
+    <div class="cta">
+      <h3>ここから先は、<br>あなただけの鑑定になります</h3>
+      <p>
+        復縁への<b>最適な時期</b>・お相手様の<b>本音の深層</b>・<b>具体的なアプローチ手順</b>は、
+        お一人おひとりの星と状況で全く変わります。<br>
+        LINEで<b>この結果のスクリーンショット</b>を送っていただければ、
+        灯が無料であなた専用の本格鑑定をお作りします。
+      </p>
+      <button class="btn line" onclick="openLine()">LINEで無料本格鑑定を受ける</button>
+      <div class="note">※結果のスクリーンショットを送ってください</div>
+    </div>
+
+    <button class="btn ghost" onclick="shareResult()">結果をシェアする</button>
+    <button class="backlink" onclick="location.reload()">もう一度診断する</button>
+
+    <footer>
+      本診断はエンターテインメントを目的としたものであり、未来や結果を保証するものではありません。<br>
+      入力された情報はお使いの端末内でのみ計算され、外部に送信・保存されることは一切ありません。
+    </footer>
+  </div>
+</div>
+
+<script>
+/* ================= 設定 ================= */
+var LINE_URL = "https://lin.ee/62Yzy0tR"; // 公式LINE友だち追加URL（設定済み）
+
+/* ================= 星空生成 ================= */
+(function(){
+  var sky=document.getElementById("sky");
+  for(var i=0;i<90;i++){
+    var s=document.createElement("i");
+    s.className="star";
+    var sz=(Math.random()*2.2+.8).toFixed(1);
+    s.style.width=sz+"px"; s.style.height=sz+"px";
+    s.style.left=(Math.random()*100).toFixed(2)+"%";
+    s.style.top=(Math.random()*100).toFixed(2)+"%";
+    s.style.opacity=(Math.random()*.7+.2).toFixed(2);
+    s.style.animationDelay=(Math.random()*3.4).toFixed(2)+"s";
+    s.style.animationDuration=(Math.random()*3+2.4).toFixed(2)+"s";
+    sky.appendChild(s);
+  }
+})();
+
+/* ================= 質問定義 ================= */
+var steps = [
+  {type:"date", key:"me", title:"あなたの生年月日を\n教えてください", small:"星の相性を読むために使います（送信はされません）"},
+  {type:"date", key:"pt", title:"お相手の生年月日を\n教えてください", small:"わからない場合はおおよそでも大丈夫です"},
+  {type:"choice", key:"q1", title:"お別れしてから、\nどのくらい経ちましたか？", opts:[
+    ["1ヶ月未満",2],["1〜3ヶ月",5],["3〜6ヶ月",4],["半年〜1年",3],["1年以上",2]]},
+  {type:"choice", key:"q2", title:"お別れを決めたのは、\nどちらでしたか？", opts:[
+    ["自分から",4],["お相手から",3],["話し合って",4],["自然消滅",2]]},
+  {type:"choice", key:"q3", title:"いまの連絡状況に\n近いものは？", opts:[
+    ["普通にやり取りできる",5],["ときどき連絡がある",4],["送れば返ってくる",3],["音信不通",1],["ブロックされている",0]]},
+  {type:"choice", key:"q4", title:"お別れの主な原因は？", opts:[
+    ["すれ違い・タイミング",5],["遠距離・環境の変化",4],["喧嘩の積み重ね",3],["「気持ちが冷めた」と言われた",2],["浮気などの裏切り",1]]},
+  {type:"choice", key:"q5", title:"お付き合いしていた期間は？", opts:[
+    ["3ヶ月未満",2],["3ヶ月〜1年",3],["1〜3年",4],["3年以上",5]]},
+  {type:"choice", key:"q6", title:"お相手に、\nいま新しい恋人は？", opts:[
+    ["いない",5],["わからない",3],["いるらしい",1]]},
+  {type:"choice", key:"q7", title:"お別れのあと、\n会ったことはありますか？", opts:[
+    ["ある（楽しく話せた）",5],["ある（気まずかった）",2],["ない",2]]},
+  {type:"choice", key:"q8", title:"共通の友人や接点は？", opts:[
+    ["多い",4],["少しある",3],["ほぼない",1]]},
+  {type:"choice", key:"q9", title:"お別れのあと、自分が\n変わったと思うことは？", opts:[
+    ["自分磨きなど、たくさんある",5],["少しある",3],["まだ何も手につかない",1]]},
+  {type:"choice", key:"q10", title:"正直なところ、\n復縁したい気持ちは？", opts:[
+    ["絶対に戻りたい",5],["できれば戻りたい",4],["迷っている",2]]}
+];
+var ans = {};
+var cur = 0;
+
+/* ================= 星座・相性 ================= */
+var ZODIAC = [
+  [120,"山羊座","earth"],[219,"水瓶座","air"],[321,"魚座","water"],[420,"牡羊座","fire"],
+  [521,"牡牛座","earth"],[622,"双子座","air"],[723,"蟹座","water"],[823,"獅子座","fire"],
+  [923,"乙女座","earth"],[1024,"天秤座","air"],[1123,"蠍座","water"],[1222,"射手座","fire"],[1232,"山羊座","earth"]
+];
+function zodiac(dstr){
+  var d = new Date(dstr);
+  var md = (d.getMonth()+1)*100 + d.getDate();
+  for(var i=0;i<ZODIAC.length;i++){ if(md < ZODIAC[i][0]) return {name:ZODIAC[i][1], el:ZODIAC[i][2]}; }
+  return {name:"山羊座", el:"earth"};
+}
+function compat(a,b){
+  if(a.el===b.el) return {pt:7, txt:"同じ気質の星をもつお二人。言葉にしなくても通じ合える、根の深いご縁です。"};
+  var pair=[a.el,b.el].sort().join("-");
+  if(pair==="air-fire") return {pt:5, txt:"風と火——お互いを高め合う相性です。一度離れても、引き合う力が残りやすいお二人。"};
+  if(pair==="earth-water") return {pt:5, txt:"大地と水——時間をかけて深く結びつく相性です。急がないほど強くなるご縁。"};
+  return {pt:2, txt:"性質の違う星をもつお二人。だからこそ惹かれ合った反面、すれ違いも生まれやすかったはず。理解が鍵になるご縁です。"};
+}
+
+/* ================= タイプ判定 ================= */
+var TYPES = {
+  silence:{name:"沈黙の冷却期間型", emoji:"🌑", head:"いまは「縁が眠っている」時間",
+    body:"連絡が取れない状態は、縁が切れたことを意味しません。星の流れの上では、お互いの記憶が整理され、嫌な記憶から先に薄れていく「冷却」の期間に視えます。ここで無理に扉を叩くと、扉はさらに固くなります。沈黙は拒絶ではなく、次の章の準備であることが少なくありません。",
+    ng:"<b>不安にまかせた連絡・SNSでの匂わせ</b>は逆効果です。いまの沈黙を破る一通は、落ち着きから送るものであって、寂しさから送るものではありません。",
+    step:"まずは自分の生活のリズムを一つ整えることから。あなたの状態が変わると、再接触したときの空気が変わります。"},
+  rival:{name:"見極めと引き寄せ型", emoji:"🌗", head:"焦りは禁物。でも、終わってもいない",
+    body:"お相手様の隣にいま誰かがいたとしても、それが「あなたとの縁の終わり」とは限りません。別れの直後に始まった関係ほど、比較の中であなたの存在が大きくなっていくことがあります。いまのあなたに必要なのは、追うことではなく、引き寄せる側に回る準備です。",
+    ng:"<b>相手の新しい関係を探ること・比べて落ち込むこと</b>。あなたの魅力が曇る一番の原因になります。",
+    step:"この期間は「あなた自身の輝きを取り戻す期間」と決めてしまいましょう。再会したとき「変わったね」と言わせた人から、縁は動き出します。"},
+  storm:{name:"感情の鎮静・待機型", emoji:"🌊", head:"いま動くと、想いが正しく届かない",
+    body:"お別れからまだ日が浅く、お互いの感情が波立っている時期です。この時期の言葉は、本当の意味の半分も届きません。ただ、裏を返せば、お相手様の中にもまだ感情がたくさん残っているということ。無風ではなく嵐なのは、想いが生きている証拠です。",
+    ng:"<b>いま結論を出そうとすること</b>。謝罪も告白も、嵐の中では流されてしまいます。",
+    step:"最低でも数週間、自分の心を落ち着けることを最優先に。「待つ」は止まることではなく、時期に備えて整えることです。"},
+  renewal:{name:"新しい私で再会型", emoji:"🌸", head:"あなたはもう、動き出しています",
+    body:"お別れのあと、自分を変えようとしてきたあなたの努力は、星の流れの上でもはっきりと良い方向に働いています。復縁が叶う人の共通点は「同じ二人に戻ろうとしなかった人」。あなたはすでにその道を歩き始めています。あとは、再会の質とタイミングだけです。",
+    ng:"<b>頑張りすぎて疲れてしまうこと</b>。魅力は余裕から生まれます。7割の力で続けられるペースに。",
+    step:"変わったあなたを、まず共通の接点にそっと見せていきましょう。直接ではなく、風の噂で届くくらいがちょうどいい。"},
+  rekindle:{name:"静かな再燃型", emoji:"🕯", head:"縁の火は、まだ消えていません",
+    body:"お二人の間には、いまも細くあたたかい糸が残っていると視えます。激しい別れ方ではなく、状況やタイミングに引き裂かれた縁は、条件が整えば静かに燃え直すことが多いのです。大切なのは、その「条件」と「時期」を見誤らないこと。焦らなければ、流れはあなたの味方です。",
+    ng:"<b>関係を急いで「定義」しようとすること</b>。「私たちってどうなの？」の一言は、再燃しかけた火を消しやすいので注意。",
+    step:"重い話ではなく、軽くあたたかい接点をひとつ。「元気？」の一言が扉を開くことは、あなたが思うよりずっと多いです。"}
+};
+function judgeType(){
+  if(ans.q3<=1) return TYPES.silence;
+  if(ans.q6===1) return TYPES.rival;
+  if(ans.q1===2 && ans._q1idx===0) return TYPES.storm;
+  if(ans.q9===5) return TYPES.renewal;
+  return TYPES.rekindle;
+}
+
+/* ================= 画面制御 ================= */
+function show(id){
+  ["scr-intro","scr-quiz","scr-wait","scr-result"].forEach(function(s){
+    document.getElementById(s).classList.add("hidden");
+  });
+  document.getElementById(id).classList.remove("hidden");
+}
+function start(){ cur=0; show("scr-quiz"); render(); }
+function goBack(){ if(cur>0){cur--; render();} }
+function render(){
+  var s = steps[cur];
+  document.getElementById("prog").style.width = Math.round(cur/steps.length*100)+"%";
+  document.getElementById("stepnum").textContent = (cur+1)+" / "+steps.length;
+  document.getElementById("backbtn").classList.toggle("hidden", cur===0);
+  var area = document.getElementById("q-area");
+  var title = s.title.replace(/\n/g,"<br>");
+  var h = '<div class="q-title">'+title+(s.small?'<small>'+s.small+'</small>':'')+'</div>';
+  if(s.type==="date"){
+    var v = ans[s.key]||"";
+    h += '<input type="date" id="dinp" min="1940-01-01" max="2010-12-31" value="'+v+'">';
+    h += '<button class="btn" onclick="pickDate(\''+s.key+'\')">つぎへ</button>';
+  }else{
+    s.opts.forEach(function(o,i){
+      h += '<button class="opt" onclick="pick(this,\''+s.key+'\','+o[1]+','+i+')">'
+        + '<svg class="oc" viewBox="0 0 24 24" fill="#d9a94a"><use href="#ico-moon"/></svg>'
+        + '<span>'+o[0]+'</span></button>';
+    });
+  }
+  area.innerHTML = h;
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function pickDate(key){
+  var v = document.getElementById("dinp").value;
+  if(!v){ document.getElementById("dinp").style.boxShadow="0 8px 20px rgba(10,6,30,.35), inset 0 0 0 2.5px #e8607e"; return; }
+  ans[key]=v; next();
+}
+var lock=false;
+function pick(el,key,val,idx){
+  if(lock) return; lock=true;
+  ans[key]=val; ans["_"+key+"idx"]=idx;
+  el.classList.add("sel");
+  setTimeout(function(){ lock=false; next(); },300);
+}
+function next(){
+  cur++;
+  if(cur<steps.length){ render(); } else { analyze(); }
+}
+
+/* ================= 演出→結果 ================= */
+var WAITS=["お二人の星の配置を読んでいます…","縁の糸をたどっています…","お相手様の心の層を視ています…","結果をまとめています…"];
+function analyze(){
+  show("scr-wait");
+  window.scrollTo({top:0});
+  var i=0;
+  var t=setInterval(function(){
+    i++;
+    if(i<WAITS.length){ document.getElementById("wait-msg").textContent=WAITS[i]; }
+    else{ clearInterval(t); result(); }
+  },950);
+}
+function result(){
+  var me=zodiac(ans.me), pt=zodiac(ans.pt), cp=compat(me,pt);
+  var qs=["q1","q2","q3","q4","q5","q6","q7","q8","q9","q10"];
+  var sum=0; qs.forEach(function(k){sum+=ans[k];});
+  var norm=Math.max(0,Math.min(1,(sum-10)/38));
+  var pct=Math.round(34+norm*50+cp.pt);
+  pct=Math.max(32,Math.min(93,pct));
+
+  var bond=Math.round((ans.q5+ans.q8+cp.pt/1.4)/14*10);
+  var heart=Math.round((ans.q3+ans.q6+ans.q7)/15*10);
+  var timing=Math.round((ans.q1+ans.q4)/10*10);
+  var ready=Math.round((ans.q9+ans.q10)/10*10);
+  [bond,heart,timing,ready]=[bond,heart,timing,ready].map(function(v){return Math.max(2,Math.min(10,v));});
+
+  var tp=judgeType();
+  show("scr-result");
+
+  /* ring animation */
+  var R=90, C=2*Math.PI*R;
+  var ring=document.getElementById("ring");
+  ring.style.strokeDasharray=C;
+  ring.style.strokeDashoffset=C;
+  setTimeout(function(){ ring.style.strokeDashoffset=C*(1-pct/100); },80);
+  var n=0, pctEl=document.getElementById("pct");
+  var cnt=setInterval(function(){ n+=1; if(n>=pct){n=pct;clearInterval(cnt);} pctEl.textContent=n; },1600/pct);
+
+  document.getElementById("type-name").textContent=tp.emoji+" "+tp.name;
+  document.getElementById("type-head").textContent=tp.head;
+  document.getElementById("type-body").innerHTML=
+    me.name+"のあなたと、"+pt.name+"のお相手様。"+cp.txt+"<br><br>"+tp.body;
+  document.getElementById("type-ng").innerHTML=tp.ng;
+  document.getElementById("type-step").innerHTML=tp.step;
+
+  var bars=[["縁の強さ",bond],["お相手の心",heart],["タイミング",timing],["あなたの準備",ready]];
+  var bh="";
+  bars.forEach(function(b){
+    bh+='<div class="bar-card"><span class="lb">'+b[0]+'　<b>'+b[1]+'</b><small>/10</small></span>'
+      + '<div class="bar"><i data-w="'+(b[1]*10)+'"></i></div></div>';
+  });
+  document.getElementById("bars").innerHTML=bh;
+  setTimeout(function(){
+    document.querySelectorAll("#bars .bar i").forEach(function(el){ el.style.width=el.dataset.w+"%"; });
+  },120);
+
+  window.scrollTo({top:0,behavior:"smooth"});
+  window._share={pct:pct,type:tp.name};
+}
+
+/* ================= CTA ================= */
+function openLine(){ window.open(LINE_URL,"_blank"); }
+function shareResult(){
+  var s=window._share||{pct:"?",type:"?"};
+  var text="私の復縁可能性は "+s.pct+"%【"+s.type+"】でした🌙\n#復縁可能性診断\n"+location.href;
+  if(navigator.share){ navigator.share({text:text}).catch(function(){}); }
+  else{ navigator.clipboard.writeText(text); alert("結果をコピーしました。SNSに貼り付けてシェアできます🌙"); }
+}
+</script>
+</body>
+</html>
