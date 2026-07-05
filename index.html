@@ -48,14 +48,16 @@
   .btn{
     display:block;width:100%;border:none;cursor:pointer;text-align:center;font-family:var(--serif);
     background:linear-gradient(100deg,#e05a7d 0%,#e0906a 55%,#dcae56 100%);
-    color:#fff;font-size:21px;font-weight:700;letter-spacing:.22em;text-indent:.22em;
-    padding:19px 10px;border-radius:999px;position:relative;
+    color:#fff;font-size:clamp(17px,5.2vw,21px);font-weight:700;letter-spacing:.22em;text-indent:.22em;
+    white-space:nowrap;padding:19px 38px;border-radius:999px;position:relative;
     box-shadow:0 10px 28px rgba(216,90,120,.35), inset 0 0 0 1px rgba(255,240,210,.45);
   }
   .btn::before,.btn::after{content:"✦";position:absolute;top:50%;transform:translateY(-50%);font-size:11px;color:rgba(255,244,220,.9)}
   .btn::before{left:22px} .btn::after{right:22px}
   .btn:active{transform:scale(.98)}
-  .btn.line{background:linear-gradient(180deg,#3ec14c,#0faf3f);box-shadow:0 8px 22px rgba(20,160,60,.4), inset 0 0 0 1px rgba(255,255,255,.35);letter-spacing:.08em;text-indent:0;font-size:19px}
+  .btn.line{background:linear-gradient(180deg,#3ec14c,#0faf3f);box-shadow:0 8px 22px rgba(20,160,60,.4), inset 0 0 0 1px rgba(255,255,255,.35);letter-spacing:.04em;text-indent:0;font-size:clamp(13px,4.2vw,19px);padding:18px 12px}
+  .btn.line::before,.btn.line::after{content:""}
+  @media (max-width:380px){.cta{padding:26px 14px}}
   .btn.ghost{background:transparent;color:var(--gold-pale);box-shadow:none;border:1px solid rgba(201,163,92,.55);font-size:15px;letter-spacing:.14em;padding:15px}
   .btn.ghost::before,.btn.ghost::after{content:""}
   .backlink{background:none;border:none;color:rgba(247,239,223,.62);font-size:14px;margin:26px auto 0;cursor:pointer;font-family:var(--serif);display:block;letter-spacing:.1em}
@@ -141,8 +143,8 @@
   .ring-txt b{font-size:64px;font-weight:800;line-height:1}
   .ring-txt b small{font-size:26px;font-weight:700}
   .ring-txt span{font-size:16px;font-weight:700;margin-top:6px;letter-spacing:.14em}
-  .type-name{font-size:33px;font-weight:800;color:var(--navy);margin-top:16px;letter-spacing:.08em}
-  .type-head{font-size:15px;color:var(--pink-deep);font-weight:700;margin-top:12px;letter-spacing:.14em}
+  .type-name{font-size:clamp(20px,6.6vw,33px);font-weight:800;color:var(--navy);margin-top:16px;letter-spacing:.05em;white-space:nowrap}
+  .type-head{font-size:clamp(12.5px,4vw,15px);color:var(--pink-deep);font-weight:700;margin-top:12px;letter-spacing:.1em;white-space:nowrap}
   .reading{
     background:linear-gradient(165deg,#f9f2e2,#f2e7cf);border-radius:20px;margin-top:16px;
     padding:24px 22px;color:var(--navy);box-shadow:0 12px 30px rgba(10,6,30,.4), inset 0 0 0 1px rgba(201,163,92,.5);
@@ -171,7 +173,9 @@
     box-shadow:0 8px 20px rgba(10,6,30,.35), inset 0 0 0 1px rgba(217,79,108,.25);
   }
   .pinkbox svg{position:absolute;left:18px;top:22px;width:24px;height:24px;fill:#d98aa4}
-  .pinkbox h5{font-size:16.5px;font-weight:800;letter-spacing:.08em;margin-bottom:8px}
+  .pinkbox h5{font-size:clamp(14.5px,4.6vw,16.5px);font-weight:800;letter-spacing:.06em;margin-bottom:8px}
+  .brk{display:none}
+  @media (max-width:360px){.brk{display:inline}}
   .pinkbox div{font-size:13.5px;line-height:2;font-weight:600}
   .pinkbox div b{color:var(--pink-deep)}
   .cta{
@@ -180,7 +184,7 @@
     box-shadow:inset 0 0 0 1px rgba(201,163,92,.65), 0 14px 34px rgba(10,6,30,.5);
   }
   .cta::before{content:"";position:absolute;inset:8px;border:1px solid rgba(201,163,92,.35);border-radius:16px;pointer-events:none}
-  .cta h3{font-size:18.5px;line-height:1.9;letter-spacing:.1em;color:#f4ecd8;font-weight:700}
+  .cta h3{font-size:clamp(14.5px,4.7vw,18.5px);line-height:1.9;letter-spacing:.06em;color:#f4ecd8;font-weight:700;white-space:nowrap}
   .cta p{font-size:12.5px;line-height:2;color:rgba(247,239,223,.82);margin-top:12px;font-weight:500}
   .cta .btn{margin-top:18px}
   .cta .note{font-size:11.5px;color:rgba(247,239,223,.72);margin-top:13px;letter-spacing:.06em}
@@ -334,7 +338,7 @@
 
     <div class="pinkbox">
       <svg><use href="#ico-moon"/></svg>
-      <h5>いま、やってはいけないこと</h5>
+      <h5>いま、<br class="brk">やってはいけないこと</h5>
       <div id="type-ng"></div>
     </div>
     <div class="pinkbox">
